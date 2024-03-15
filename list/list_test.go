@@ -7,20 +7,23 @@ import (
 var size int
 
 // var lists [3]IList
-var lists [2]IList
+var lists [1]IList
 
 func createLists(size int) {
 	arraylist := &ArrayList{}
 	(*arraylist).Init(size)
+	linkedlist := LinkedList{nil, 0}
 	//lists = [3]IList{arraylist, &LinkedList{}, &DoublyLinkedList{}}
-	lists = [2]IList{arraylist, &LinkedList{}}
+	//lists = [2]IList{arraylist, &LinkedList{}}
+	lists = [1]IList{&linkedlist}
+
 }
 
 func deleteLists() {
 	//in this case, createLists alone solves the problem
 	//however, I let the template here to be used in other tests
 	lists[0] = nil
-	lists[1] = nil
+	//lists[1] = nil
 	//lists[2] = nil
 }
 
@@ -185,36 +188,36 @@ func TestRemoveOnIndexMid(t *testing.T) {
 	}
 }
 
-/*func TestSet(t *testing.T) {
-  defer setupTest()()
-  for _, list := range lists {
-    //fulfill list with 1's
-    for i := 0; i < size; i++ {
-      list.Add(1)
-    }
+func TestSet(t *testing.T) {
+	defer setupTest()()
+	for _, list := range lists {
+		//fulfill list with 1's
+		for i := 0; i < size; i++ {
+			list.Add(1)
+		}
 
-    //set -1 on even indexes
-    for i := 0; i < size; i++ {
-      if i%2 == 0 {
-        list.Set(-1, i)
-      }
-    }
+		//set -1 on even indexes
+		for i := 0; i < size; i++ {
+			if i%2 == 0 {
+				list.Set(-1, i)
+			}
+		}
 
-    //check values before index 2 are the same
-    for i := 0; i < size; i++ {
-      val, err := list.Get(i)
-      if i%2 == 0 {
-        if val != -1 {
-          t.Errorf("%T value on index %d is %d, but we expected it to be -1", list, i, val)
-        }
-      } else {
-        if val == -1 {
-          t.Errorf("%T value on index %d is %d, but we expected it to be different from -1", list, i, val)
-        }
-      }
-      if err != nil {
-        t.Errorf(err.Error())
-      }
-    }
-  }
-}*/
+		//check values before index 2 are the same
+		for i := 0; i < size; i++ {
+			val, err := list.Get(i)
+			if i%2 == 0 {
+				if val != -1 {
+					t.Errorf("%T value on index %d is %d, but we expected it to be -1", list, i, val)
+				}
+			} else {
+				if val == -1 {
+					t.Errorf("%T value on index %d is %d, but we expected it to be different from -1", list, i, val)
+				}
+			}
+			if err != nil {
+				t.Errorf(err.Error())
+			}
+		}
+	}
+}
