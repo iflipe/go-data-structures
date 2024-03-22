@@ -10,8 +10,8 @@ type LinkedList struct {
 }
 
 type Node struct {
-	value int
-	next  *Node
+	Value int
+	Next  *Node
 }
 
 func (list *LinkedList) Add(value int) {
@@ -20,10 +20,10 @@ func (list *LinkedList) Add(value int) {
 		list.head = newNode
 	} else {
 		iter := list.head
-		for iter.next != nil {
-			iter = iter.next
+		for iter.Next != nil {
+			iter = iter.Next
 		}
-		iter.next = newNode
+		iter.Next = newNode
 	}
 	list.inserted++
 }
@@ -37,15 +37,15 @@ func (list *LinkedList) AddOnIndex(val int, index int) error {
 	if list.inserted == 0 {
 		list.head = newNode
 	} else if index == 0 {
-		newNode.next = list.head.next
+		newNode.Next = list.head.Next
 		list.head = newNode
 	} else {
 		prev := list.head
 		for i := 0; i < index-1; i++ {
-			prev = prev.next
+			prev = prev.Next
 		}
-		newNode.next = prev.next
-		prev.next = newNode
+		newNode.Next = prev.Next
+		prev.Next = newNode
 	}
 	list.inserted++
 	return nil
@@ -56,13 +56,13 @@ func (list *LinkedList) RemoveOnIndex(index int) error {
 		return errors.New("index out of bounds")
 	}
 	if index == 0 {
-		list.head = list.head.next
+		list.head = list.head.Next
 	} else {
 		iter := list.head
 		for i := 0; i < index-1; i++ {
-			iter = iter.next
+			iter = iter.Next
 		}
-		iter.next = iter.next.next
+		iter.Next = iter.Next.Next
 	}
 	list.inserted--
 	return nil
@@ -75,9 +75,9 @@ func (list *LinkedList) Get(index int) (int, error) {
 
 	iter := list.head
 	for i := 0; i < index; i++ {
-		iter = iter.next
+		iter = iter.Next
 	}
-	return iter.value, nil
+	return iter.Value, nil
 }
 
 func (list *LinkedList) Set(value int, index int) error {
@@ -86,9 +86,9 @@ func (list *LinkedList) Set(value int, index int) error {
 	}
 	iter := list.head
 	for i := 0; i < index; i++ {
-		iter = iter.next
+		iter = iter.Next
 	}
-	iter.value = value
+	iter.Value = value
 	return nil
 }
 

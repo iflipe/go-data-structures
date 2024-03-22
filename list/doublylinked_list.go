@@ -10,9 +10,9 @@ type DoublyLinkedList struct {
 }
 
 type MegaNode struct {
-	value int
-	prev  *MegaNode
-	next  *MegaNode
+	Value int
+	Prev  *MegaNode
+	Next  *MegaNode
 }
 
 func (list *DoublyLinkedList) Add(value int) {
@@ -21,8 +21,8 @@ func (list *DoublyLinkedList) Add(value int) {
 		list.head = newNode
 		list.tail = newNode
 	} else {
-		newNode.prev = list.tail
-		list.tail.next = newNode
+		newNode.Prev = list.tail
+		list.tail.Next = newNode
 		list.tail = newNode
 	}
 	list.inserted++
@@ -38,23 +38,23 @@ func (list *DoublyLinkedList) AddOnIndex(val int, index int) error {
 		list.Add(val)
 		return nil
 	} else if index == 0 {
-		newNode.next = list.head
+		newNode.Next = list.head
 		list.head = newNode
 	} else {
 		cur := list.head
 		if list.inserted/2 > index {
 			for i := 0; i < index-1; i++ {
-				cur = cur.next
+				cur = cur.Next
 			}
 		} else {
 			cur = list.tail
 			for i := list.inserted; i > index; i-- {
-				cur = cur.prev
+				cur = cur.Prev
 			}
 		}
-		newNode.next = cur.next
-		newNode.prev = cur
-		cur.next = newNode
+		newNode.Next = cur.Next
+		newNode.Prev = cur
+		cur.Next = newNode
 	}
 	list.inserted++
 	return nil
@@ -71,25 +71,25 @@ func (list *DoublyLinkedList) RemoveOnIndex(index int) error {
 		return nil
 	}
 	if index == 0 {
-		list.head = list.head.next
-		list.head.prev = nil
+		list.head = list.head.Next
+		list.head.Prev = nil
 	} else if index == list.inserted-1 {
-		list.tail = list.tail.prev
-		list.tail.next = nil
+		list.tail = list.tail.Prev
+		list.tail.Next = nil
 	} else {
 		cur := list.head
 		if list.inserted/2 > index {
 			for i := 0; i < index-1; i++ {
-				cur = cur.next
+				cur = cur.Next
 			}
 		} else {
 			cur = list.tail
 			for i := list.inserted; i > index; i-- {
-				cur = cur.prev
+				cur = cur.Prev
 			}
 		}
-		cur.next.next.prev = cur
-		cur.next = cur.next.next
+		cur.Next.Next.Prev = cur
+		cur.Next = cur.Next.Next
 	}
 	list.inserted--
 	return nil
@@ -103,15 +103,15 @@ func (list *DoublyLinkedList) Get(index int) (int, error) {
 	cur := list.head
 	if list.inserted/2 > index {
 		for i := 0; i < index; i++ {
-			cur = cur.next
+			cur = cur.Next
 		}
 	} else {
 		cur = list.tail
 		for i := list.inserted - 1; i > index; i-- {
-			cur = cur.prev
+			cur = cur.Prev
 		}
 	}
-	return cur.value, nil
+	return cur.Value, nil
 }
 
 func (list *DoublyLinkedList) Set(value int, index int) error {
@@ -120,9 +120,9 @@ func (list *DoublyLinkedList) Set(value int, index int) error {
 	}
 	cur := list.head
 	for i := 0; i < index; i++ {
-		cur = cur.next
+		cur = cur.Next
 	}
-	cur.value = value
+	cur.Value = value
 	return nil
 }
 
