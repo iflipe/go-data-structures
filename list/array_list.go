@@ -128,3 +128,27 @@ func (list *ArrayList) Set(value, index int) error {
 func (list *ArrayList) Size() int {
 	return list.inserted
 }
+
+func (list *ArrayList) BSeach(value int, init int, end int) int {
+	if init > end {
+		return -1
+	}
+	mid := (init + end) / 2
+	if list.values[mid] == value {
+		return mid
+	}
+	if list.values[mid] < value {
+		return list.BSeach(value, mid+1, end)
+	} else {
+		return list.BSeach(value, init, mid-1)
+	}
+}
+
+func (list *ArrayList) LSearch(value int) int {
+	for i := 0; i < list.inserted; i++ {
+		if list.values[i] == value {
+			return i
+		}
+	}
+	return -1
+}
