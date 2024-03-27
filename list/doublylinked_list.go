@@ -129,3 +129,12 @@ func (list *DoublyLinkedList) Set(value int, index int) error {
 func (list *DoublyLinkedList) Size() int {
 	return list.inserted
 }
+
+func (list *DoublyLinkedList) Reverse() {
+	current := list.head
+	for current != nil {
+		current.Prev, current.Next = current.Next, current.Prev
+		current = current.Prev
+	}
+	list.head, list.tail = list.tail, list.head
+}
