@@ -129,8 +129,34 @@ func (list *ArrayList) Size() int {
 	return list.inserted
 }
 
+<<<<<<< HEAD
 func (list *ArrayList) Reverse() {
 	for i := 0; i < len(list.values)/2; i++ {
 		list.values[i], list.values[len(list.values)-i-1] = list.values[len(list.values)-i-1], list.values[i]
 	}
 }
+=======
+func (list *ArrayList) BSeach(value int, init int, end int) int {
+	if init > end {
+		return -1
+	}
+	mid := (init + end) / 2
+	if list.values[mid] == value {
+		return mid
+	}
+	if list.values[mid] < value {
+		return list.BSeach(value, mid+1, end)
+	} else {
+		return list.BSeach(value, init, mid-1)
+	}
+}
+
+func (list *ArrayList) LSearch(value int) int {
+	for i := 0; i < list.inserted; i++ {
+		if list.values[i] == value {
+			return i
+		}
+	}
+	return -1
+}
+>>>>>>> 26bd2c9b2236fbaf07f17a020ac9b38a0fba7777
