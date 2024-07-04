@@ -95,3 +95,18 @@ func (list *LinkedList) Set(value int, index int) error {
 func (list *LinkedList) Size() int {
 	return list.inserted
 }
+
+func (list *LinkedList) Reverse() {
+	if list.inserted == 0 {
+		return
+	}
+	var prev, next *Node
+	current := list.head
+	for current != nil {
+		next = current.Next
+		current.Next = prev
+		prev = current
+		current = next
+	}
+	list.head = prev
+}
