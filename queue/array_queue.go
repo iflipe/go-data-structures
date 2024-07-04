@@ -56,7 +56,7 @@ func (queue *ArrayQueue) DoubleSize() {
 }
 
 func (queue *ArrayQueue) IsEmpty() bool {
-	return queue.Size() == 0
+	return queue.front == -1 && queue.rear == -1
 }
 
 func (queue *ArrayQueue) Init(size int) {
@@ -66,7 +66,7 @@ func (queue *ArrayQueue) Init(size int) {
 }
 
 func (queue *ArrayQueue) Size() int {
-	if queue.front == -1 && queue.rear == -1 {
+	if queue.IsEmpty() {
 		return 0
 	}
 	size := queue.rear - queue.front + 1
