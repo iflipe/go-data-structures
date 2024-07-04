@@ -152,3 +152,41 @@ func (list *ArrayList) LSearch(value int) int {
 	}
 	return -1
 }
+
+func (list *ArrayList) BubbleSort() {
+	has_swapped := false
+	for i := 0; i < list.Size()-1; i++ {
+		has_swapped = false
+		for j := 0; j < list.Size()-i-1; j++ {
+			if list.values[j] > list.values[j+1] {
+				list.values[j], list.values[j+1] = list.values[j+1], list.values[j]
+				has_swapped = true
+			}
+		}
+		if !has_swapped {
+			return
+		}
+	}
+}
+
+/*
+func (list *ArrayList) InsertionSort() {
+	for i := 1; i < list.Size(); i++ {
+		for j := i; j > 0 && list.values[j-1] > list.values[j]; j-- {
+			list.values[j-1], list.values[j] = list.values[j], list.values[j-1]
+		}
+	}
+}
+*/
+
+func (list *ArrayList) InsertionSort() {
+	for i := 1; i < list.Size(); i++ {
+		j := i
+		tmp := list.values[i]
+		for j > 0 && list.values[j-1] > tmp {
+			list.values[j] = list.values[j-1]
+			j--
+		}
+		list.values[j] = tmp
+	}
+}
